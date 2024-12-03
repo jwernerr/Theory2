@@ -3,19 +3,28 @@ let sides = 6;
 let dice = 2;
 let probability = 0.3;
 let pspace = [];
-let array = [];
-for (let i = 0; i < dice; i++) {
-    array.push(1);
-}
 for (let i = 1; i <= (sides ** dice); i++) {
     let step = (sides ** dice) % i;
     let round = (sides ** dice) / (i - step);
-    let last = array;
+    let next = [];
+    for (let j = 0; j < dice; j++) {
+        next.push(1);
+    }
+    let last = next;
     if (i === 1) {
-        pspace.push(array);
+        pspace.push(next);
     }
     else {
-        for (let j = dice - 1; j >= 0; i--) {
+        for (let j = dice - 1; j >= 0; j--) {
+            if (last[j] = sides) {
+                next[j] = 1;
+            }
+            else {
+                next[j] = last[j] + 1;
+            }
         }
+        pspace.push(next);
+        last = next;
     }
 }
+console.log(pspace);
